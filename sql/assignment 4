@@ -1,0 +1,147 @@
+CREATE TABLE Banks (
+  bank_id INT AUTO_INCREMENT PRIMARY KEY,
+  bank_name TEXT NOT NULL
+);
+
+CREATE TABLE Customers (
+  customer_id INT AUTO_INCREMENT PRIMARY KEY,
+  first_name TEXT NOT NULL,
+  last_name TEXT NOT NULL,
+  email VARCHAR(50) UNIQUE,
+  phone_number VARCHAR(20),
+  address TEXT,
+  bank_id INT,
+  FOREIGN KEY (bank_id) REFERENCES Banks(bank_id)
+);
+
+CREATE TABLE Loans (
+  loan_id INT AUTO_INCREMENT PRIMARY KEY,
+  loan_type TEXT,
+  amount DECIMAL(10,2) NOT NULL,
+  start_date DATE NOT NULL,
+  end_date DATE NOT NULL
+);
+
+CREATE TABLE Customer_loans (
+  customer_id INT NOT NULL,
+  loan_id INT NOT NULL,
+  status VARCHAR(20) NOT NULL DEFAULT 'Pending',
+  PRIMARY KEY (customer_id, loan_id),
+  FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+  FOREIGN KEY (loan_id) REFERENCES Loans(loan_id)
+);
+
+INSERT INTO Banks (bank_name) VALUES
+('Bank A'),
+('Bank B'),
+('Bank C');
+
+INSERT INTO Customers (first_name, last_name, email, phone_number, address, bank_id) VALUES
+('John', 'Doe', 'john.doe@example.com', '555-1234', '123 Main St, Anytown USA', 1),
+('Jane', 'Doe', 'jane.doe@example.com', '555-5678', '456 Maple Ave, Anytown USA', 2),
+('Jae', 'De', 'jae.doe@example.com', '545-5678', '456 Mple Ave, Anytown Uk', 3),
+('Jack', 'Do', 'jack.doe@example.com', '557-5678', '457 Makle Ave, Anytown US', 1),
+('Hune', 'Di', 'june.doe@example.com', '535-5678', '476 Maplje Ave, Anytown ind', 2),
+('Jene', 'Doie', 'jene.doe@example.com', '544-5678', '458 Maphle Ave, Anytown alb', 3);
+
+INSERT INTO Loans (loan_type, amount, start_date, end_date) VALUES
+('Home Loan', 550000, '2022-01-01', '2032-01-05'),
+('Home Loan', 100000, '2022-02-01', '2032-02-18'),
+('Home Loan', 150000, '2022-01-11', '2032-03-26'),
+('Personal Loan', 50000, '2022-02-01', '2022-02-01'),
+('Personal Loan', 70000, '2022-02-15', '2023-02-15'),
+('Personal Loan', 30000, '2022-02-18', '2022-12-01');
+
+INSERT INTO Customer_loans (customer_id, loan_id, status) VALUES
+(1, 1, 'Approved'),
+(1, 2, 'Pending'),
+(2, 1, 'Rejected'),
+(3, 2, 'Approved'),
+(4, 1, 'pending'),
+(4, 2, 'Approved'),
+(4, 3, 'Approved'),
+(4, 4, 'pending'),
+(4, 5, 'pending'),
+(4, 6, 'Approved'),
+(5, 2, 'Approved'),
+(6, 2, 'Approved'),
+(3, 1, 'Rejected');
+
+(1)
+SELECT DISTINCT *
+FROM Customers;
+
+(2)
+SELECT c.*, b.bank_name, l.*
+FROM Customers c
+LEFT JOIN Banks b ON c.bank_id = b.bank_id
+LEFT JOIN Customer_loans cl ON c.customer_id = cl.customer_id
+LEFT JOIN Loans l ON cl.loan_id = l.loan_id;
+
+(3)
+SELECT c.first_name, c.last_name
+FROM Customers c
+JOIN Customer_loans cl ON c.customer_id = cl.customer_id
+JOIN Loans l ON cl.loan_id = l.loan_id
+WHERE l.loan_type IN ('Home Loan', 'Personal Loan')
+  AND cl.status = 'Approved'
+GROUP BY c.customer_id
+HAVING COUNT(DISTINCT l.loan_type) = 1;
+
+(4)
+SELECT c.*
+FROM Customers c
+JOIN Customer_loans cl ON c.customer_id = cl.customer_id
+WHERE cl.status = 'Rejected';
+
+(5)
+SELECT c.first_name, c.last_name, COUNT(cl.loan_id) as num_loans
+FROM Customers c
+JOIN Customer_loans cl ON c.customer_id = cl.customer_id
+GROUP BY c.customer_id
+HAVING COUNT(cl.loan_id) > 5;
+
+(6)
+CREATE VIEW Customer_Bank AS
+SELECT c.first_name, c.last_name, b.bank_name, l.loan_type, l.amount, l.start_date, l.end_date
+FROM Customers c
+JOIN Banks b ON c.bank_id = b.bank_id
+JOIN Customer_loans cl ON c.customer_id = cl.customer_id
+JOIN Loans l ON cl.loan_id = l.loan_id
+WHERE l.start_date >= '2022-02-01';
+SELECT * FROM Customer_Bank;
+
+(7)
+UPDATE Customers c
+JOIN Customer_loans cl ON c.customer_id = cl.customer_id
+JOIN Loans l ON cl.loan_id = l.loan_id
+SET c.first_name = 'new_first_name',
+    c.last_name = 'new_last_name',
+    c.phone_number = '5224',
+    c.address = 'new_address'
+WHERE l.loan_type = 'Home Loan';
+
+SELECT c.first_name, c.last_name, l.loan_type, cl.status
+FROM Customers c
+INNER JOIN Customer_loans cl ON c.customer_id = cl.customer_id
+INNER JOIN Loans l ON cl.loan_id = l.loan_id
+WHERE l.loan_type = 'Home Loan';
+
+(8)
+SELECT c.first_name, c.last_name,SUM(l.amount) AS total_loan
+FROM Customers c
+JOIN Customer_loans cl ON c.customer_id = cl.customer_id
+JOIN Loans l ON cl.loan_id = l.loan_id
+GROUP BY c.customer_id
+HAVING total_loan > 50000
+LIMIT 1;
+
+(9)
+ALTER TABLE Loans ADD COLUMN rate FLOAT(12);
+SELECT * FROM Loans;
+
+(10)
+SELECT *
+FROM Customers
+WHERE first_name LIKE 'H%';
+

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>jQuery get() method</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <h3>This is an example of using the get() method in jQuery</h3>
+    <button>Click me</button>
+    <p id="p1"></p>
+    <p id="p2"></p>
+    <script>
+      $(document).ready(function () {
+        $("button").click(function () {
+          $.get("test.html", function (data, status) {
+            document.getElementById("p1").innerHTML = data;
+            document.getElementById("p2").innerHTML = "Status: " + status;
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

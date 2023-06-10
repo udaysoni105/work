@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Get Wood Values from JSON</title>
+  </head>
+  <body>
+    <script>
+      const data = [
+        {
+          name: "Harry Potter",
+          wand: [
+            {
+              core: "phoenix feather",
+              length: "11 inches",
+              wood: "holly",
+            },
+            {
+              core: "unicorn hair",
+              length: "13 inches",
+              wood: "cherry",
+            }
+          ],
+        },
+        {
+          name: "Hermione Granger",
+          wand: [
+            {
+              core: "dragon heartstring",
+              length: "10 and 3/4 inches",
+              wood: "vine",
+            },
+            {
+              core: "unicorn hair",
+              length: "13 inches",
+              wood: "cherry",
+            },
+          ],
+        },
+        {
+          name: "Ron Weasley",
+          wand: [
+            {
+              core: "unicorn hair",
+              length: "14 inches",
+              wood: "willow",
+            },
+            {
+              core: "unicorn hair",
+              length: "13 inches",
+              wood: "cherry",
+            },
+          ],
+        },
+        {
+          name: "Neville Longbottom",
+          wand: [
+            {
+              core: "unicorn hair",
+              length: "13 inches",
+              wood: "cherry",
+            },
+            {
+              core: "unicorn hair",
+              length: "13 inches",
+              wood: "cherry",
+            },
+          ],
+        },
+      ];
+
+      const woodValues = data.map((item) => item.wand[1].wood);
+
+      console.log(woodValues);
+    </script>
+  </body>
+</html>

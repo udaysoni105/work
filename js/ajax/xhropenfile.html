@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>XMLHttpRequest Open Example</title>
+	<script>
+		function loadFile() {
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === XMLHttpRequest.DONE) {
+					if (xhr.status === 200) {
+						console.log(xhr.responseText);
+					} else {
+						console.log('Error: ' + xhr.status);
+					}
+				}
+			};
+			xhr.open('GET', 'myfile.txt', true);
+			xhr.send();
+		}
+	</script>
+</head>
+<body>
+	<h1>XMLHttpRequest Open Example</h1>
+	<button type="button" onclick="loadFile()">Load File</button>
+</body>
+</html>

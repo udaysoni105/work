@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>Array Example</h2>
+
+    <p id="demo"></p>
+
+    <script>
+      const numbers = [1, 2, 3, 4, 5];
+
+      document.getElementById("demo").innerHTML +=
+        "The first element of the array is " + numbers[0] + "<br>";
+      document.getElementById("demo").innerHTML +=
+        "The second element of the array is " + numbers[1] + "<br>";
+      document.getElementById("demo").innerHTML +=
+        "The third element of the array is " + numbers[2] + "<br>";
+      document.getElementById("demo").innerHTML +=
+        "The length of the array is " + numbers.length + "<br>";
+      document.getElementById("demo").innerHTML +=
+        "The first element of the array is " + numbers.shift() + "<br>";
+      document.getElementById("demo").innerHTML +=
+        "The new length of the array is " + numbers.unshift(0) + "<br>";
+      document.getElementById("demo").innerHTML +=
+        "The last element of the array is " + numbers.pop() + "<br>";
+      document.getElementById("demo").innerHTML +=
+        "The new length of the array is " + numbers.push(6) + "<br>";
+      document.getElementById("demo").innerHTML +=
+        "The string representation of the array is " +
+        numbers.toString() +
+        "<br>";
+      document.getElementById("demo").innerHTML +=
+        "The joined string representation of the array is " +
+        numbers.join(" - ") +
+        "<br>";
+      document.getElementById("demo").innerHTML +=
+        "The sorted array is " + numbers.sort() + "<br>";
+      document.getElementById("demo").innerHTML +=
+        "The reversed array is " + numbers.reverse() + "<br>";
+      document.getElementById("demo").innerHTML +=
+        "The sliced array is " + numbers.slice(1, 4) + "<br>";
+      document.getElementById("demo").innerHTML +=
+        "The spliced array is " + numbers.splice(2, 0, 2.5, 3.5) + "<br>";
+      document.getElementById("demo").innerHTML +=
+        "Numbers is =============================== " + numbers + "<br>";
+      document.getElementById("demo").innerHTML +=
+        "The concatenated array is " + numbers.concat([5, 7, 8, 9]) + "<br>";
+      document.getElementById("demo").innerHTML +=
+        "The index of 4 in the array is " + numbers.indexOf(4) + "<br>";
+      document.getElementById("demo").innerHTML +=
+        "The array contains 6: " + numbers.includes(6) + "<br>";
+        document.getElementById("demo").innerHTML +=
+        "reduce is ================================"+numbers + "<br>";
+      document.getElementById("demo").innerHTML +=
+        "the reduce " + numbers.reduce(getSum, 0);
+      function getSum(total, num) {
+        console.log(total)
+        console.log(num)
+        return total + (num);
+      }
+      
+      +"<br>";
+      document.getElementById("demo").innerHTML +=
+        "reduce is ================================"+numbers + "<br>";
+      document.getElementById("demo").innerHTML +=
+        "the filter " + numbers.filter(checkAdult);
+      function checkAdult(numbers) {
+        return numbers >= 1;
+      }
+      +"<br>";
+    </script>
+  </body>
+</html>

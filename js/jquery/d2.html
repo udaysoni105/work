@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".btn").click(function () {
+          alert($("li").length);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <button class="btn">How many li elements?</button>
+
+    <ol>
+      <li>India</li>
+      <li>US</li>
+      <li>UK</li>
+      <li>Australia</li>
+    </ol>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Synchronous and Asynchronous jQuery AJAX Example</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		function synchronousRequest() {
+			$.ajax({
+				url: "data.txt",
+				dataType: "text",
+				async: false,
+				success: function(data) {
+					console.log('data==============',data);
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					console.log("Error: " + textStatus + " - " + errorThrown);
+				}
+			});
+		}
+
+		async function asynchronousRequest() {
+			$.ajax({
+				url: "data.txt",
+				dataType: "text",
+				success:await function(data) {
+					console.log(data);
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					console.log("Error: " + textStatus + " - " + errorThrown);
+				}
+			});
+		}
+	</script>
+</head>
+<body>
+	
+	<h1>Synchronous and Asynchronous jQuery AJAX Example</h1>
+	<button type="button" onclick="asynchronousRequest() ,synchronousRequest()">Synchronous Request</button>
+	<!-- <button type="button" onclick="asynchronousRequest()">Asynchronous Request</button> -->
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Products</title>
+  </head>
+  <body>
+    <h1>Products</h1>
+    <div id="products"></div>
+    <script>
+      const products = {
+        categories: [
+          {
+            name: "Electronics",
+            products: [
+              {
+                name: "Smartphone",
+                price: 999,
+              },
+              {
+                name: "Tablet",
+                price: 799,
+              },
+              {
+                name: "Laptop",
+                price: 1499,
+              },
+            ],
+          },
+          {
+            name: "Clothing",
+            products: [
+              {
+                name: "Shirt",
+                price: 39,
+              },
+              {
+                name: "Pants",
+                price: 59,
+              },
+              {
+                name: "Dress",
+                price: 99,
+              },
+            ],
+          },
+        ],
+      };
+
+      console.log(JSON.stringify(products, null, 2));
+    </script>
+  </body>
+</html>

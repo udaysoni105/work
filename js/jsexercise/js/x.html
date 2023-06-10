@@ -1,0 +1,41 @@
+<html>  
+<head> Javascript Events </head>  
+<body>  
+<script language="Javascript" type="text/Javascript">  
+  
+    function clickevent()  
+    {  
+        document.write("This is JavaTpoint");  
+    }  
+
+</script>  
+<input type="text" id="input1" onfocus="focusevent()"/>  
+<script>  
+ 
+    function focusevent()  
+    {  
+        document.getElementById("input1").style.background=" aqua";  
+    }  
+
+</script>  
+<input type="text" id="input1" onkeydown="keydownevent()"/>  
+<script>  
+
+    function keydownevent()  
+    {  
+        document.getElementById("input1");  
+        alert("Pressed a key");  
+    }  
+
+</script>  
+<body onload="window.alert('Page successfully loaded');">  
+    <script>  
+
+    document.write("The page is loaded successfully");  
+
+    </script>  
+<form>  
+<input type="button" onclick="clickevent()" value="Who's this?"/>  
+</form>  
+</body>  
+</html>  

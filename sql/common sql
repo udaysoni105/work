@@ -1,0 +1,228 @@
+CREATE TABLE school (
+id int AUTO_INCREMENT PRIMARY KEY,
+name varchar(25),
+city varchar(30)
+);
+
+CREATE TABLE donation (
+id int AUTO_INCREMENT PRIMARY KEY,
+type VARCHAR(20),
+amount int,
+date DATE
+);
+
+CREATE TABLE class (
+id int AUTO_INCREMENT primary key,
+name varchar(50),
+school_id int,
+foreign key (school_id) references school(id) on delete cascade
+);
+
+CREATE TABLE grade (
+id int AUTO_INCREMENT primary key,
+name varchar(50),
+class_id int,
+foreign key (class_id) references class(id) on delete cascade
+);
+
+CREATE TABLE student (
+id int AUTO_INCREMENT primary key,
+name varchar(50),
+grade_id int,
+donation_id int,
+foreign key (grade_id) references grade(id) on delete cascade,
+foreign key (donation_id) references donation(id) on delete cascade
+);
+
+CREATE TABLE teacher (
+id int AUTO_INCREMENT primary key,
+name varchar(50),
+phone int,
+grade_id int,
+foreign key (grade_id) references grade(id) on delete cascade
+);
+
+INSERT INTO school (name,city) VALUES
+('n.k school','ahmedabad'),
+('y.n school','mumbai'),
+('p.b school','chennai'),
+('b.b school','surat'),
+('n.b school','patan'),
+('v.b school','gadhinagar');
+
+INSERT INTO donation (type,amount,date) VALUES
+('Cash',700,'2022-01-01'),
+('Cash',1000,'2022-01-02'),
+('Check',350,'2022-01-03'),
+('Check',250,'2022-01-04'),
+('Check',650,'2022-02-01'),
+('Credit Card',200,'2022-02-02'),
+('Credit Card',850,'2022-02-03'),
+('Credit Card',380,'2022-02-04');
+
+INSERT INTO class (name,school_id) VALUES
+('class 10',1),
+('class 11',2),
+('class 12',3);
+
+INSERT INTO grade (name,class_id) VALUES
+('grade A',1),
+('grade B',2),
+('grade C',3);
+
+INSERT INTO student (name,grade_id,donation_id) VALUES
+('John Doe',3,2 ),
+('Tohn De',2,1 ),
+('Hohn Sdf',1,3 ),
+('GOhn NCe',2,6 ),
+('Jon Roe',3,4 ),
+('dsv',2,null),
+('pev',1,null);
+
+INSERT INTO teacher (name,phone,grade_id) VALUES
+('kanta',565,1),
+('manda',456,2),
+('jonis',363,3);
+
+(1)
+SELECT student.name AS student_name, school.name AS school_name, grade.name AS grade_name, class.name AS class_name
+FROM student 
+JOIN grade ON student.grade_id = grade.id
+JOIN class ON grade.class_id = class.id
+JOIN school ON class.school_id = school.id;
+
+(2)
+SELECT school.name, 
+COUNT(DISTINCT teacher.id) AS num_teachers, 
+COUNT(DISTINCT grade.id) AS num_grades, 
+COUNT(DISTINCT class.id) AS num_classes, 
+COUNT(DISTINCT student.id) AS num_students
+FROM school
+JOIN class ON class.school_id = school.id
+JOIN grade ON grade.class_id = class.id
+JOIN student ON student.grade_id = grade.id
+JOIN teacher ON teacher.grade_id = grade.id
+GROUP BY school.name;
+
+(3)
+SELECT school.name AS school_name, SUM(donation.amount) AS total_donation
+FROM school 
+JOIN class ON class.school_id = school.id
+JOIN grade ON grade.class_id = class.id
+JOIN student ON student.grade_id = grade.id
+JOIN donation ON student.donation_id = donation.id
+GROUP BY school.name;
+
+(4)
+SELECT class.name AS class_name, SUM(donation.amount) AS total_donation
+FROM class
+JOIN grade ON grade.class_id = class.id
+JOIN student ON student.grade_id = grade.id
+JOIN donation ON student.donation_id = donation.id
+GROUP BY class.name;
+
+(5)
+SELECT grade.name AS grade_name, SUM(donation.amount) AS total_donation
+FROM grade
+JOIN student ON student.grade_id = grade.id
+JOIN donation ON student.donation_id = donation.id
+GROUP BY grade.name;
+
+(6)
+SELECT student.name AS student_name, SUM(donation.amount) AS total_donation
+FROM student
+JOIN donation ON student.donation_id = donation.id
+GROUP BY student.name;
+
+(7)
+SELECT school.name AS school_name
+FROM school
+LEFT JOIN student ON school.id = student.donation_id
+WHERE student.donation_id IS NULL;
+
+(8)
+SELECT student.name AS student_name
+FROM student
+LEFT JOIN donation ON student.donation_id = donation.id
+WHERE donation.id IS NULL;
+
+(9)
+UPDATE student
+SET grade_id = 3
+WHERE grade_id = 2;
+SELECT * FROM student;
+
+(10)
+DELETE FROM school WHERE id = 1;
+select * from school;
+
+(11)
+SELECT school.name AS school_name, SUM(donation.amount) AS total_donation
+FROM school 
+JOIN class ON class.school_id = school.id
+JOIN grade ON grade.class_id = class.id
+JOIN student ON student.grade_id = grade.id
+JOIN donation ON donation.id = student.id
+GROUP BY school.name
+ORDER BY total_donation DESC
+LIMIT 3;
+
+(12)
+SELECT school.name AS school_name, SUM(donation.amount) AS total_donation
+FROM school
+LEFT JOIN class ON class.school_id = school.id
+LEFT JOIN grade ON grade.class_id = class.id
+LEFT JOIN student ON student.grade_id = grade.id
+LEFT JOIN donation ON donation.id = student.id
+GROUP BY school.name
+ORDER BY total_donation ASC
+LIMIT 3;
+
+(13)
+SELECT school.name AS school_name, SUM(donation.amount) AS total_donation
+FROM school
+JOIN class ON school.id = class.school_id
+JOIN grade ON class.id = grade.class_id
+JOIN student ON grade.id = student.grade_id
+JOIN donation ON student.donation_id = donation.id
+GROUP BY school.id
+HAVING total_donation > 100 AND total_donation < 600;
+
+(14)
+SELECT *
+FROM donation
+WHERE type = 'Credit Card'
+ORDER BY amount DESC;
+
+(15)
+SELECT *
+FROM donation
+WHERE type IN ('Cash', 'Check')
+ORDER BY amount DESC;
+
+(16)
+SELECT student.*, donation.date
+FROM student
+JOIN donation ON student.donation_id = donation.id
+ORDER BY donation.date ASC;
+
+(17)
+SELECT class.name AS class_name, SUM(donation.amount) AS total_donation
+FROM class
+JOIN grade ON grade.class_id = class.id
+JOIN student ON student.grade_id = grade.id
+JOIN donation ON donation.id = student.donation_id
+GROUP BY class.id
+ORDER BY total_donation DESC
+LIMIT 5;
+
+(18)
+CREATE VIEW total_donations_student AS
+SELECT student.id , student.name AS student_name, SUM(donation.amount) AS total_donation
+FROM student
+JOIN donation ON student.donation_id = donation.id
+GROUP BY student.id
+ORDER BY total_donation DESC;
+SELECT * FROM total_donations_student;
+
+

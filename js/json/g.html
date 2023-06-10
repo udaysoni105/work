@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Extract Image and Thumbnail URLs</title>
+</head>
+
+<body>
+  <h1>Extract Image and Thumbnail URLs</h1>
+  <div id="output"></div>
+  <script>
+    const jsonObj = {
+      "id": "0001",
+      "type": "donut",
+      "name": "Cake",
+      "image": {
+        "url": "images/0001.jpg",
+        "width": 200,
+        "height": 200
+      },
+      "thumbnail": {
+        "url": "images/thumbnails/0001.jpg",
+        "width": 32,
+        "height": 32
+      }
+    };
+
+    const imageURL = jsonObj.image.url;
+    const thumbnailURL = jsonObj.thumbnail.url;
+
+
+    const resultObj = {
+      "imageURL": imageURL,
+      "thumbnailURL": thumbnailURL
+    };
+
+    console.log("Result:", resultObj);
+  </script>
+</body>
+
+</html>

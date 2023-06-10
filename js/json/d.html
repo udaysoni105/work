@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Employees</title>
+  </head>
+  <body>
+    <h1>Employees</h1>
+    <script>
+      const employees = {
+        employees: [
+          {
+            id: 1,
+            name: "John Doe",
+            department: "Engineering",
+            skills: ["JavaScript", "React", "Node.js"],
+          },
+          {
+            id: 2,
+            name: "Jane Smith",
+            department: "Marketing",
+            skills: [
+              "Social media marketing",
+              "Content creation",
+              "Copywriting",
+            ],
+          },
+          {
+            id: 3,
+            name: "Bob Johnson",
+            department: "Sales",
+            skills: ["Salesforce", "Account management"],
+          },
+        ],
+      };
+
+      console.log(JSON.parse(employees));
+    </script>
+  </body>
+</html>

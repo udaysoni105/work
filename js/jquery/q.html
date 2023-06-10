@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Get all LI elements inside UL using JavaScript</title>
+
+    <style>
+      * {
+        font: 18px Calibri;
+      }
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <h3>Get all LI elements inside a UL using JavaScript.</h3>
+
+      <ul id="nav_1">
+        <li>Ahmad</li>
+        <li>Hamza</li>
+        <li>Ali</li>
+        <li>saad</li>
+      </ul>
+
+      <p>
+        <input type="button" value="Click it" onclick="get_list_items();" />
+      </p>
+    </div>
+  </body>
+
+  <script>
+    const get_list_items = () => {
+      const lis = document.getElementById("nav_1").getElementsByTagName("li");
+
+      // Loop through the NodeList object.
+      for (let i = 0; i <= lis.length - 1; i++) {
+        console.log(lis[i]);
+      }
+    };
+  </script>
+</html>

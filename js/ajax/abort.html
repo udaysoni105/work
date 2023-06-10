@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AJAX Abort Example</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+	<h1>AJAX Abort Example</h1>
+
+	<button type="button" onclick="makeRequest()">Make Request</button>
+	<button type="button" onclick="abortRequest()">Abort Request</button>
+
+	<script>
+		var xhr;
+
+		function makeRequest() {
+			xhr = $.ajax({
+				url: 'https://example.com/api/data',
+				method: 'GET',
+				success: function(response) {
+					console.log(response);
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					console.log(textStatus, errorThrown);
+				}
+			});
+		}
+
+		function abortRequest() {
+			if (xhr) {
+				xhr.abort();
+			}
+		}
+	</script>
+</body>
+</html>

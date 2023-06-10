@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>JSON Example</title>
+  </head>
+  <body>
+    <script>
+      var myData = {
+        number: 42,
+        string: "Hello, World!",
+        boolean: true,
+        array: [1, 2, 3],
+        object: { a: 1, b: 2, c: 3 },
+        nully: null,
+      };
+
+      var myJson = JSON.stringify(myData);
+
+      console.log(myJson);
+    </script>
+  </body>
+</html>

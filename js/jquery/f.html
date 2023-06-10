@@ -1,0 +1,5 @@
+The problem with above statement is that the selectors is having meta characters
+and to use any of the meta-characters (such as !"#$%&'()*+,./:;<=>?@[\]^`{|}~ )
+as a literal part of a name, it must be escaped with with two backslashes: \\.
+For example, an element with id="foo.bar", can use the selector $("#foo\\.bar").
+So the correct syntax is, $('#myid\\.3').text('blah blah!!!');

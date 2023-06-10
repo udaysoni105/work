@@ -1,0 +1,88 @@
+1.Give JSON Object Example for employee
+{  
+    "employee": {  
+        "name":       "sonoo",   
+        "salary":      56000,   
+        "married":    true  
+    }  
+}  
+
+2.Create json with this data types
+    • Number
+    {"age":30}
+    
+    • String
+    {"name":"John"}
+    
+    • Boolean
+    {"sale":true}
+    
+    • Array
+    {
+	"employees":["John", "Anna", "Peter"]
+    }
+    
+    • Object
+    {
+	"employee":{"name":"John", "age":30, "city":"New York"}
+    }
+    
+    • Null
+    {"middlename":null}
+    
+3.Give any one example of multiple Arrays in JSON Objects
+{"employees":[    
+    {"name":"Ram", "email":"ram@gmail.com", "age":23},    
+    {"name":"Shyam", "email":"shyam23@gmail.com", "age":28},  
+    {"name":"John", "email":"john@gmail.com", "age":33},    
+    {"name":"Bob", "email":"bob32@gmail.com", "age":41}   
+]}  
+
+4.Give example with Nested Arrays in JSON Objects
+{
+"author": 
+    {
+      "lastname": "Doe",
+      "firstname": "Jane"
+    },
+"editor": 
+    {
+      "lastname": "Smith",
+      "firstname": "Jane"
+    },
+  "title": "The Ultimate Database Study Guide",  
+  "category": ["Non-Fiction", "Technology"]
+ }
+
+
+6.Implement json parse and json stringify function on this program.
+{"employee":"Reo",
+"salary":2000,
+"month":5
+}
+{ employee: 'Reo',
+salary: 2000,
+month: 5
+}
+
+5.Get all category from this json.
+{
+    "Dogs":[
+    {
+        "category":"Companion dogs",
+    },
+    {
+        "category":"Hounds",
+    }
+]
+}
+7.Get url of image and thumbnail from below json.
+image url: images/0001.jpg
+thumbnail url: images/thumbnails/0001.jpg
+
+8.Get all wood value from json.
+['holly', 'vine', 'mina', 'virea']
+
+9.Get answer of math subject.
+"answer": "12",
+"answer": "4"

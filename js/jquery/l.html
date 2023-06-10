@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>stop vs finish</title>
+
+	<style>
+		body {
+			margin: 15px;
+		}
+
+		#box {
+			position: relative;
+			border: 2px dashed darkgreen;
+			box-sizing: border-box;
+			padding: 15px;
+			width: 700px;
+			height: 400px;
+		}
+
+		.text {
+			color: green;
+			position: absolute;
+			font-size: 18px;
+			font-weight: bold;
+		}
+
+		#buttons {
+			display: inline-block;
+			padding: 10px;
+			box-sizing: border-box;
+			position: absolute;
+			top: 25%;
+			left: 38%;
+		}
+
+		button {
+			display: block;
+			padding: 8px;
+			margin: 5px;
+			width: 120px;
+			font-weight: bold;
+			letter-spacing: 0.5px;
+		}
+	</style>
+
+	<script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<script>
+		$(document).ready(function () {
+			var vertPos = $("#box").height() - 15;
+			var horzPos = $("#box").width() - 120;
+			//start animation
+			$(".start").click(function () {
+				$(".text")
+					.clearQueue()
+					.stop()
+					.css({ top: 15, left: 15 })
+					.animate({ top: vertPos }, 2000)
+					.animate({ left: horzPos }, 2000)
+					.animate({ top: 15 }, 2000);
+			});
+			//stop(true,true)
+			$(".stopBtn").click(function () {
+				$(".text").stop(true, true);
+			});
+			//finish method
+			$(".finishBtn").click(function () {
+				$(".text").finish();
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<div id="box">
+		<span class="text">hello world</span>
+		<div id="buttons">
+			<button class="start">start</button>
+			<button class="stopBtn">stop(true,true)</button>
+			<button class="finishBtn">finish</button>
+		</div>
+	</div>
+</body>
+
+</html>

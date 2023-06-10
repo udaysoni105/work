@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dog Categories</title>
+  </head>
+  <body>
+    <h1>Dog Categories</h1>
+    <div id="categories"></div>
+    <script>
+      const dogs = {
+        Dogs: [
+          {
+            category: "Companion dogs",
+            name: "Chihuahua",
+          },
+          {
+            category: "Hounds",
+            name: "Foxhound",
+          },
+        ],
+      };
+
+      const categories = dogs.Dogs.map((dog) => dog.category);
+
+      const result = {
+        categories: categories,
+      };
+
+      console.log(JSON.stringify(result, null, 2));
+    </script>
+  </body>
+</html>

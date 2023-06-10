@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>XMLHttpRequest Example</title>
+</head>
+<body>
+	<h1>XMLHttpRequest Example</h1>
+
+	<form id="myForm">
+		<label for="name">Name:</label>
+		<input type="text" id="name" name="name">
+		<br><br>
+		<label for="email">Email:</label>
+		<input type="email" id="email" name="email">
+		<br><br>
+		<button type="button" onclick="submitForm()">Submit</button>
+	</form>
+
+	<script>
+		function submitForm() {
+			// Create a new XMLHttpRequest object
+			var xhr = new XMLHttpRequest();
+
+			// Define the callback function
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+					// Request successful, do something with the response
+					console.log(xhr.responseText);
+				}
+			};
+
+			// Get the form data
+			var form = document.getElementById("myForm");
+			var formData = new FormData(form);
+
+			// Open the request
+			xhr.open('POST', 'https://example.com/api/submit');
+
+			// Send the request with the form data
+			xhr.send(formData);
+		}
+	</script>
+</body>
+</html>

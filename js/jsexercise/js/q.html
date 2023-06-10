@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Loop Example</h2>
+
+<p id="demo"></p>
+
+<script>
+// for loop example
+let i;
+let text = "";
+for (i = 0; i < 5; i++) {
+  text += "The number is " + i + "<br>";
+}
+document.getElementById("demo").innerHTML += text;
+
+let cars = ["BMW", "Volvo", "Mini"];
+text = "";
+for (let car of cars) {
+  text += car + "<br>";
+}
+document.getElementById("demo").innerHTML += "<br>" + text;
+
+let j = 0;
+text = "";
+while (j < 5) {
+  text += "The number is " + j + "<br>";
+  j++;
+}
+document.getElementById("demo").innerHTML += "<br>" + text;
+
+let k = 0;
+text = "";
+do {
+  text += "The number is " + k + "<br>";
+  k++;
+} while (k < 5);
+document.getElementById("demo").innerHTML += "<br>" + text;
+</script>
+
+</body>
+</html>
